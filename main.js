@@ -1,5 +1,6 @@
 window.addEventListener("load", function () {
   const inputEvent = new Event('input', { bubbles: true });
+  const changeEvent = new Event('change', { bubbles: true });
 
   const params = new URLSearchParams(location.search);
 
@@ -7,15 +8,15 @@ window.addEventListener("load", function () {
     await sendClick('button[name="職人モード(テキスト)"]');
 
     await sendClick('button[name="文字色"]');
-    await setValue('.popover input', '#000000');
+    await setValue('.popover input', `#${params.get('color')}` ?? '#000000');
     await setValue('textarea[name="テキスト"]', params.get('text') ?? 'テキ\nスト');
     await setValue('input[name="その他のフォント"]', params.get('font') ?? "normal 1em 'Mplus1Bold'");
     if (params.get('gradient')) await sendClick('button[name="グラデーション"]');
 
     await sendClick('button[name="効果をつける"]');
-    await sendClick('button[name="職人モード(効果)"]');
 
-    
+    await setValue('select[name="切り抜き"]', params.get('clip') ?? 0);
+    if (params.get('transparent')) await sendClick('button[name="背景色(透過)"]');
 
     await sendClick('button[name="効果をつける(戻る)"]');
   }
@@ -38,6 +39,7 @@ window.addEventListener("load", function () {
       waitForElement(selector, (element) => {
         element.value = value;
         element.dispatchEvent(inputEvent);
+        element.dispatchEvent(changeEvent);
       });
       resolve();
     });
