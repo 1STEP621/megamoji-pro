@@ -12,12 +12,19 @@ window.addEventListener("load", function () {
     await setValue('textarea[name="テキスト"]', undefined, params.get('text')?.replace("\\n", "\n") ?? 'テキ\nスト');
     await setValue('input[name="その他のフォント"]', undefined, params.get('font') ?? "normal 1em 'Mplus1Bold'");
     await sendClickIf('button[name="グラデーション"]', undefined, params.get('gradient') != null);
-    const outline = params.get('outline').split(",") ?? [];
-    for (let i = 0; i < outline.length; i++) {
-      await sendClick('button[name="アウトライン (追加)"]');
-      await sendClick(`button.color[name="アウトライン(色)"]`, i);
-      await setValue(`.popover input`, i, `#${outline[i]}`);
+    if (params.get("outline") != null) {
+      const outline = params.get('outline').split(",");
+      for (let i = 0; i < outline.length; i++) {
+        await sendClick('button[name="アウトライン (追加)"]');
+        await sendClick(`button.color[name="アウトライン(色)"]`, i);
+        await setValue(`.popover input`, i, `#${outline[i]}`);
+      }
     }
+    await sendClickIf('button[name="両端揃え"]', undefined, params.get('align') == "justify");
+    await sendClickIf('button[name="中央揃え"]', undefined, params.get('align') == "center");
+    await sendClickIf('button[name="左揃え"]', undefined, params.get('align') == "left");
+    await sendClickIf('button[name="右揃え"]', undefined, params.get('align') == "right");
+    await sendClickIf('button[name="サンプル表示"]', undefined, params.get('sample-preview') != null);
 
     await sendClick('button[name="効果をつける"]');
 
@@ -28,6 +35,21 @@ window.addEventListener("load", function () {
 
     await sendClickIf('button[name="画像サイズ自動"]', undefined, params.get('size') != null);
     await setValueIf('div:has(button[name="画像サイズ自動"])+div>div>input.number', undefined, params.get('size'), params.get('size') != null);
+    if (params.get("outline") != null) {
+      effects = params.get('effect').split(",");
+      for await (checkbox of Array.from(document.getElementsByClassName("checkbox"))) {
+        await new Promise(resolve => {
+          if (effects.includes(checkbox.textContent)) {
+            checkbox.click();
+            setTimeout(() => {
+              resolve();
+            }, 100);
+          } else {
+            resolve();
+          }
+        });
+      }
+    }
 
     await sendClick('button[name="効果をつける(戻る)"]');
   }

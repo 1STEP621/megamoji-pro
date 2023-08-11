@@ -17,6 +17,14 @@ https://zk-phi.github.io/MEGAMOJI/?text=Hello&font=normal+1em+%27NotoSerifBlack%
 - `gradient`: グラデーションをオンにします。このパラメータに値は不要です。`&gradient`と指定するだけでOKです。
 - `size`: 絵文字のサイズ指定です。`256`のように数字で指定してください。
 - `outline`: 枠線の指定です。`ffffff,ff0000,00ff00,0000ff`のように、カンマ区切りで複数指定できます。色は`#`なしのHEXカラーコードで指定してください。
+- `sample-preview`: サンプルのプレビュー表示をオンにします。このパラメータに値は不要です。`&sample-preview`と指定するだけでOKです。
+- `align`: 文字の配置を指定します。
+  - `justify`: 両端揃え
+  - `center`: 中央揃え
+  - `left`: 左揃え
+  - `right`: 右揃え
+- `effect`: 効果を指定します。`キラ,Foil`のようにカンマ区切りで複数指定できます。
+  
 
 ## 使い方
 1. このリポジトリの「Code」ボタンから「Download ZIP」します。
