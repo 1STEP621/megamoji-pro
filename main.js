@@ -7,11 +7,17 @@ window.addEventListener("load", function () {
   async function proc() {
     await sendClick('button[name="職人モード(テキスト)"]');
 
-    await sendClickIf('button[name="文字色"]', params.get('color') != null);
-    await setValueIf('.popover input', `#${params.get('color')}`, params.get('color') != null);
-    await setValue('textarea[name="テキスト"]', params.get('text')?.replace("\\n", "\n") ?? 'テキ\nスト');
-    await setValue('input[name="その他のフォント"]', params.get('font') ?? "normal 1em 'Mplus1Bold'");
-    await sendClickIf('button[name="グラデーション"]', params.get('gradient') != null);
+    await sendClickIf('button[name="文字色"]', undefined, params.get('color') != null);
+    await setValueIf('.popover input', undefined, `#${params.get('color')}`, params.get('color') != null);
+    await setValue('textarea[name="テキスト"]', undefined, params.get('text')?.replace("\\n", "\n") ?? 'テキ\nスト');
+    await setValue('input[name="その他のフォント"]', undefined, params.get('font') ?? "normal 1em 'Mplus1Bold'");
+    await sendClickIf('button[name="グラデーション"]', undefined, params.get('gradient') != null);
+    const outline = params.get('outline').split(",") ?? [];
+    for (let i = 0; i < outline.length; i++) {
+      await sendClick('button[name="アウトライン (追加)"]');
+      await sendClick(`button.color[name="アウトライン(色)"]`, i);
+      await setValue(`.popover input`, i, `#${outline[i]}`);
+    }
 
     await sendClick('button[name="効果をつける"]');
 
@@ -28,10 +34,10 @@ window.addEventListener("load", function () {
 
   proc();
 
-  function waitForElement(selector) {
+  function waitForElement(selector, nth = null) {
     return new Promise(resolve => {
-      if (document.querySelector(selector)) {
-        resolve(document.querySelector(selector));
+      if (document.querySelectorAll(selector)) {
+        resolve(document.querySelectorAll(selector)[nth ?? 0]);
       } else {
         setTimeout(() => {
           waitForElement(selector);
@@ -40,9 +46,9 @@ window.addEventListener("load", function () {
     });
   }
 
-  function setValue(selector, value) {
+  function setValue(selector, nth = null, value) {
     return new Promise(resolve => {
-      waitForElement(selector).then(element => {
+      waitForElement(selector, nth).then(element => {
         element.value = value;
         element.dispatchEvent(inputEvent(value));
         element.dispatchEvent(changeEvent(value));
@@ -53,10 +59,10 @@ window.addEventListener("load", function () {
     });
   };
 
-  function setValueIf(selector, value, condition) {
+  function setValueIf(selector, nth = null, value, condition) {
     return new Promise(resolve => {
       if (condition) {
-        setValue(selector, value).then(() => {
+        setValue(selector, value, nth).then(() => {
           resolve();
         });
       } else {
@@ -65,9 +71,9 @@ window.addEventListener("load", function () {
     });
   };
 
-  function sendClick(selector) {
+  function sendClick(selector, nth = null) {
     return new Promise(resolve => {
-      waitForElement(selector).then(element => {
+      waitForElement(selector, nth).then(element => {
         element.click();
         setTimeout(() => {
           resolve();
@@ -76,10 +82,10 @@ window.addEventListener("load", function () {
     });
   };
 
-  function sendClickIf(selector, condition) {
+  function sendClickIf(selector, nth = null, condition) {
     return new Promise(resolve => {
       if (condition) {
-        sendClick(selector).then(() => {
+        sendClick(selector, nth).then(() => {
           resolve();
         });
       } else {
