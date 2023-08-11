@@ -16,6 +16,7 @@ https://zk-phi.github.io/MEGAMOJI/?text=hello&font=normal+1em+%27NotoSerifBlack%
   - 3: そのまま (長方形)
 - ほかのパラメータについても順次対応中です。
 - `gradient`: グラデーションをオンにします。このパラメータに値は不要です。`&gradient`と指定するだけでOKです。
+- `size`: 絵文字のサイズ指定です。`256`のように数字で指定してください。
 
 ## 使い方
 1. このリポジトリの「Code」ボタンから「Download ZIP」します。
