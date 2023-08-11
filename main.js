@@ -9,14 +9,14 @@ window.addEventListener("load", function () {
 
     await sendClick('button[name="文字色"]');
     await setValue('.popover input', `#${params.get('color')}` ?? '#000000');
-    await setValue('textarea[name="テキスト"]', params.get('text') ?? 'テキ\nスト');
+    await setValue('textarea[name="テキスト"]', params.get('text').replace("\\n", "\n") ?? 'テキ\nスト');
     await setValue('input[name="その他のフォント"]', params.get('font') ?? "normal 1em 'Mplus1Bold'");
-    if (params.get('gradient')) await sendClick('button[name="グラデーション"]');
+    if (params.get('gradient') != null) await sendClick('button[name="グラデーション"]');
 
     await sendClick('button[name="効果をつける"]');
 
     await setValue('select[name="切り抜き"]', params.get('clip') ?? 0);
-    if (params.get('transparent')) await sendClick('button[name="背景色(透過)"]');
+    if (params.get('transparent') != null) await sendClick('button[name="背景色(透過)"]');
 
     await sendClick('button[name="効果をつける(戻る)"]');
   }
