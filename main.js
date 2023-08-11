@@ -21,13 +21,13 @@ window.addEventListener("load", function () {
 
     await sendClick('button[name="効果をつける"]');
 
-    await setValue('select[name="切り抜き"]', params.get('clip') ?? 0);
-    await sendClickIf('button[name="背景色(透過)"]', params.get('transparent') != null);
+    await setValue('select[name="切り抜き"]', undefined, params.get('clip') ?? 0);
+    await sendClickIf('button[name="背景色(透過)"]', undefined, params.get('transparent') != null);
 
     await sendClick('button[name="職人モード(効果)"]');
 
-    await sendClickIf('button[name="画像サイズ自動"]', params.get('size') != null);
-    await setValueIf('div:has(button[name="画像サイズ自動"])+div>div>input.number', params.get('size') ?? 128, params.get('size') != null);
+    await sendClickIf('button[name="画像サイズ自動"]', undefined, params.get('size') != null);
+    await setValueIf('div:has(button[name="画像サイズ自動"])+div>div>input.number', undefined, params.get('size'), params.get('size') != null);
 
     await sendClick('button[name="効果をつける(戻る)"]');
   }
@@ -62,7 +62,7 @@ window.addEventListener("load", function () {
   function setValueIf(selector, nth = null, value, condition) {
     return new Promise(resolve => {
       if (condition) {
-        setValue(selector, value, nth).then(() => {
+        setValue(selector, nth, value).then(() => {
           resolve();
         });
       } else {
