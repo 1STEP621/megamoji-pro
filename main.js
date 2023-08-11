@@ -48,7 +48,7 @@ window.addEventListener("load", function () {
         element.dispatchEvent(changeEvent(value));
         setTimeout(() => {
           resolve();
-        }, 1000);
+        }, 100);
       });
     });
   };
@@ -59,7 +59,7 @@ window.addEventListener("load", function () {
         element.click();
         setTimeout(() => {
           resolve();
-        }, 1000);
+        }, 100);
       });
     });
   };
