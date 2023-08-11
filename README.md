@@ -3,13 +3,13 @@ MEGAMOJIに便利な機能を追加するブラウザ拡張機能です。
   
 ## 機能  
 クエリパラメーターで絵文字のプリセットを指定します。  
-https://zk-phi.github.io/MEGAMOJI/?text=hello&font=normal+1em+%27NotoSerifBlack%27&color=333333&transparent=true&clip=3  
-のように、`https://zk-phi.github.io/MEGAMOJI/?パラメータ名=値&パラメータ名=値...`という形式で指定します。
+https://zk-phi.github.io/MEGAMOJI/?text=Hello&font=normal+1em+%27NotoSerifBlack%27&color=333333&transparent&clip=3  
+のように、`https://zk-phi.github.io/MEGAMOJI/?パラメータ名=値&パラメータ名=値&パラメータ名=値...`という形式で指定します。
 - `text`: 絵文字にしたい文字列を指定します。
-- `font`: フォントを指定します。`normal 1em 'NotoSerifBlack'`のように、MEGAMOJI職人モードのフォント指定と同じ形式で指定します。ただし、`'`は`%27`にエンコードしてください。
+- `font`: フォントを指定します。`normal 1em 'NotoSerifBlack'`のように、MEGAMOJI職人モードのフォント指定と同じ形式で指定します。
 - `color`: 文字色を指定します。`333333`のように、HEXカラーコードで指定します。
 - `transparent`: 背景を透明にするかどうかを指定します。このパラメータに値は不要です。`&transparent`と指定するだけでOKです。
-- `clip`: 切り抜きを指定します。MEGAMOJIの**非**職人モード状態での、切り抜き指定セレクトボックスの番号をしていします。
+- `clip`: 切り抜きを指定します。MEGAMOJIの**非**職人モード状態での、切り抜き指定セレクトボックスの番号を指定します。
   - 0: ぴっちり
   - 1: はみだす (アス比維持)
   - 2: おさめる (アス比維持)
