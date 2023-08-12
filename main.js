@@ -35,20 +35,13 @@ window.addEventListener("load", function () {
 
     await sendClickIf('button[name="画像サイズ自動"]', undefined, params.get('size') != null);
     await setValueIf('div:has(button[name="画像サイズ自動"])+div>div>input.number', undefined, params.get('size'), params.get('size') != null);
+    await waitForElement('.checkbox');
     if (params.get("effect") != null) {
+      await waitForElement('.checkbox');
       effects = params.get('effect').split(",");
-      for await (checkbox of Array.from(document.getElementsByClassName("checkbox"))) {
-        await new Promise(resolve => {
-          if (effects.includes(checkbox.textContent)) {
-            checkbox.click();
-            setTimeout(() => {
-              resolve();
-            }, 100);
-          } else {
-            resolve();
-          }
-        });
-      }
+      checkboxes = Array.from(document.getElementsByClassName('checkbox'));
+      targetCheckboxes = checkboxes.filter((elem) => effects.includes(elem.textContent));
+      await sendClickAllElems(targetCheckboxes);
     }
 
     await sendClick('button[name="効果をつける(戻る)"]');
@@ -58,7 +51,7 @@ window.addEventListener("load", function () {
 
   function waitForElement(selector, nth = null) {
     return new Promise(resolve => {
-      if (document.querySelectorAll(selector)) {
+      if (document.querySelectorAll(selector).length > 0) {
         resolve(document.querySelectorAll(selector)[nth ?? 0]);
       } else {
         setTimeout(() => {
@@ -114,5 +107,16 @@ window.addEventListener("load", function () {
         resolve();
       }
     });
+  }
+
+  async function sendClickAllElems(elements) {
+    for await (const element of elements) {
+      await new Promise(resolve => {
+        element.click();
+        setTimeout(() => {
+          resolve();
+        }, 100);
+      });
+    }
   }
 });

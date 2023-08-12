@@ -33,3 +33,7 @@ https://zk-phi.github.io/MEGAMOJI/?text=Hello&font=normal+1em+%27NotoSerifBlack%
 4. 右上の「デベロッパーモード」をオンにします。
 5. 「パッケージ化されていない拡張機能を読み込む」をクリックします。
 6. 解凍したフォルダを選択します。
+
+## その他
+- [MEGAMOJI](https://zk-phi.github.io/MEGAMOJI/)
+- [MEGAMOJIのGitHubリポジトリ](https://github.com/zk-phi/MEGAMOJI)
