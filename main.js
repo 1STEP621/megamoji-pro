@@ -4,12 +4,21 @@ window.addEventListener("load", function () {
 
   const params = new URLSearchParams(location.search);
 
+  const progressCurtainElem = '<div id="progress-curtain">プリセットの適用中です...<br>クリックしないでください。</div>';
+  
   async function proc() {
+    document.body.insertAdjacentHTML('afterbegin', progressCurtainElem);
+
     await sendClick('button[name="職人モード(テキスト)"]');
 
     await sendClickIf('button[name="文字色"]', undefined, params.get('color') != null);
     await setValueIf('.popover input', undefined, `#${params.get('color')}`, params.get('color') != null);
-    await setValue('textarea[name="テキスト"]', undefined, params.get('text')?.replace("\\n", "\n") ?? 'テキ\nスト');
+    if (params.get("text") == null) {
+      await setValue('textarea[name="テキスト"]', undefined, ' ');
+      await setValue('textarea[name="テキスト"]', undefined, '');
+    } else {
+      await setValue('textarea[name="テキスト"]', undefined, params.get('text')?.replace("\\n", "\n"));
+    }
     await setValue('input[name="その他のフォント"]', undefined, params.get('font') ?? "normal 1em 'Mplus1Bold'");
     await sendClickIf('button[name="グラデーション"]', undefined, params.get('gradient') != null);
     if (params.get("outline") != null) {
@@ -45,6 +54,8 @@ window.addEventListener("load", function () {
     }
 
     await sendClick('button[name="効果をつける(戻る)"]');
+
+    document.getElementById('progress-curtain').remove();
   }
 
   proc();

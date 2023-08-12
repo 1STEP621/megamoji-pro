@@ -5,6 +5,7 @@
   "manifest_version": 3,
   "content_scripts": [{
     "matches": ["https://zk-phi.github.io/MEGAMOJI/**"],
-    "js": ["main.js"]
+    "js": ["main.js"],
+    "css": ["style.css"]
   }]
 }

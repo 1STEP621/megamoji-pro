@@ -1,0 +1,17 @@
+#progress-curtain {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeaa006e;
+  z-index: 999999;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+  line-height: 2em;
+}
