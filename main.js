@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
 
     await sendClickIf('button[name="画像サイズ自動"]', undefined, params.get('size') != null);
     await setValueIf('div:has(button[name="画像サイズ自動"])+div>div>input.number', undefined, params.get('size'), params.get('size') != null);
-    if (params.get("outline") != null) {
+    if (params.get("effect") != null) {
       effects = params.get('effect').split(",");
       for await (checkbox of Array.from(document.getElementsByClassName("checkbox"))) {
         await new Promise(resolve => {
