@@ -52,13 +52,17 @@ window.addEventListener("load", function () {
       targetCheckboxes = checkboxes.filter((elem) => effects.includes(elem.textContent));
       await sendClickAllElems(targetCheckboxes);
     }
+    await sendClickIf('button[name="背景色"]', undefined, params.get('background') != null);
+    await setValueIf('.popover input', undefined, `#${params.get('background')}`, params.get('background') != null);
 
     await sendClick('button[name="効果をつける(戻る)"]');
 
     document.getElementById('progress-curtain').remove();
   }
 
-  proc();
+  if (params.size > 0) {
+    proc();
+  }
 
   function waitForElement(selector, nth = null) {
     return new Promise(resolve => {

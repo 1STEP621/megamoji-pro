@@ -24,6 +24,7 @@ https://zk-phi.github.io/MEGAMOJI/?text=Hello&font=normal+1em+%27NotoSerifBlack%
   - `left`: 左揃え
   - `right`: 右揃え
 - `effect`: 効果を指定します。`キラ,Foil`のようにカンマ区切りで複数指定できます。
+- `background`: 背景色を指定します。`ffffff`のように、`#`なしのHEXカラーコードで指定します。
   
 
 ## 使い方
