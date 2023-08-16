@@ -71,7 +71,7 @@ window.addEventListener("load", function () {
       } else {
         setTimeout(() => {
           waitForElement(selector);
-        }, 100);
+        }, 50);
       }
     });
   }
@@ -84,7 +84,7 @@ window.addEventListener("load", function () {
         element.dispatchEvent(changeEvent(value));
         setTimeout(() => {
           resolve();
-        }, 100);
+        }, 50);
       });
     });
   };
@@ -107,7 +107,7 @@ window.addEventListener("load", function () {
         element.click();
         setTimeout(() => {
           resolve();
-        }, 100);
+        }, 50);
       });
     });
   };
@@ -130,7 +130,7 @@ window.addEventListener("load", function () {
         element.click();
         setTimeout(() => {
           resolve();
-        }, 100);
+        }, 50);
       });
     }
   }
